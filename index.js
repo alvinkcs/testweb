@@ -1,6 +1,7 @@
 // 'use strict';
 
 //Loading dependencies & initializing express
+
 var os = require('os'); //for operating system-related utility methods and properties
 var express = require('express'); 
 var app = express();
@@ -27,7 +28,9 @@ app.get("/", function(req, res){
 var server = http.createServer(app);
 
 //Ports on which server should listen - 8000 or the one provided by the environment
-server.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT || 8000,()=>{
+	console.log("server running!")
+});
 
 //Initialize socket.io
 var io = socketIO(server);
@@ -37,6 +40,7 @@ var io = socketIO(server);
 //Implementing Socket.io
 //connection is a synonym of reserved event connect
 //connection event is fired as soon as a client connects to this socket.
+
 io.sockets.on('connection', function(socket) {
 
 	// Convenience function to log server messages on the client.
@@ -104,4 +108,4 @@ io.sockets.on('connection', function(socket) {
 	  console.log('received bye');
 	});
   
-  });
+  });	
